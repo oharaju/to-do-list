@@ -1,43 +1,43 @@
 const form = document.querySelector('.register');
 const taskInput = document.querySelector('.taskInput');
 const list = document.querySelector('.list');
-let tasks = JSON.parse(localStorage.getItem('listTask')) || [];
 
+let tasks = JSON.parse(localStorage.getItem("listTask")) || [];
 
 function addTaskToLocalStorage() {
   const currentTask = taskInput.value;
   tasks.push(currentTask);
   const newTasks = JSON.stringify(tasks);
   localStorage.setItem('listTask', newTasks);
-
-  console.log(tasks)
 }
 
 function createList() {
-  const item = document.createElement('li');
-  item.innerHTML = `${tasks}`
-  list.appendChild(item)
-
-
-
-  console.log(item)
+  tasks.forEach(function(task) {
+    const item = document.createElement('li');
+    item.appendChild(document.createTextNode(task));
+    list.appendChild(item);
+  })
 }
 
+function clearList() {
+  list.innerHTML = "";
+}
 
-const clearInput = function() {
+function clearInput() {
   taskInput.value = "";
 }
 
-function handleSubmit() {
-  addTaskToLocalStorage();
-  createList();
-  clearInput();
-}
-
-form.addEventListener("submit", function (e) {
+function handleSubmit(e) {
   e.preventDefault();
 
   if(taskInput.value.length > 0) {
-    handleSubmit();
+    addTaskToLocalStorage();
+    clearList();
+    createList();
+    clearInput();
   }
-});
+}
+
+form.addEventListener("submit", handleSubmit);
+
+createList();
