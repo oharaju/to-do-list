@@ -12,11 +12,27 @@ function addTaskToLocalStorage() {
 }
 
 function createList() {
+
   tasks.forEach(function(task) {
     const item = document.createElement('li');
+
+    const btnRemove = document.createElement('button');
+    const textRemove = document.createTextNode('delete');
+    btnRemove.appendChild(textRemove);
+
+    const position = tasks.indexOf(task);
+    btnRemove.setAttribute('onclick', removeTask(position));
+
+
     item.appendChild(document.createTextNode(task));
+    item.appendChild(btnRemove);
     list.appendChild(item);
   })
+}
+
+function removeTask(position) {
+  // tasks.splice(position, 1);
+  console.log(tasks)
 }
 
 function clearList() {
