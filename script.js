@@ -4,15 +4,17 @@ const list = document.querySelector('.list');
 
 let tasks = JSON.parse(localStorage.getItem("listTask")) || [];
 
-function addTaskToLocalStorage() {
+function addTaskArray() {
   const currentTask = taskInput.value;
   tasks.push(currentTask);
+}
+
+function updateLocalStorage() {
   const newTasks = JSON.stringify(tasks);
   localStorage.setItem('listTask', newTasks);
 }
 
-function createList() {
-
+function generateList() {
   tasks.forEach(function(task) {
     const item = document.createElement('li');
 
@@ -20,9 +22,13 @@ function createList() {
     const textRemove = document.createTextNode('delete');
     btnRemove.appendChild(textRemove);
 
-    const position = tasks.indexOf(task);
-    btnRemove.setAttribute('onclick', removeTask(position));
-
+    btnRemove.addEventListener("click", function() {
+      const position = tasks.indexOf(task);
+      removeTaskArray(position);
+      updateLocalStorage();
+      removeList();
+      generateList();
+    });
 
     item.appendChild(document.createTextNode(task));
     item.appendChild(btnRemove);
@@ -30,30 +36,36 @@ function createList() {
   })
 }
 
-function removeTask(position) {
-  // tasks.splice(position, 1);
-  console.log(tasks)
-}
-
-function clearList() {
-  list.innerHTML = "";
-}
-
 function clearInput() {
   taskInput.value = "";
 }
 
+function removeList() {
+  list.innerHTML = "";
+}
+
+function removeTaskArray(position) {
+  tasks.splice(position, 1);
+}
+
+function validateInput(value) {
+  return value.length > 0
+}
+
 function handleSubmit(e) {
   e.preventDefault();
+  const valueInput = taskInput.value;
 
-  if(taskInput.value.length > 0) {
-    addTaskToLocalStorage();
-    clearList();
-    createList();
+  if(validateInput(valueInput)) {
+    addTaskArray();
+    updateLocalStorage();
+    removeList();
+    generateList();
+
     clearInput();
   }
 }
 
 form.addEventListener("submit", handleSubmit);
 
-createList();
+generateList();
