@@ -30,10 +30,37 @@ function generateList() {
       generateList();
     });
 
+    const btnUpdate = document.createElement('button');
+    const textUpdate = document.createTextNode('editar');
+    btnUpdate.setAttribute("class", "updateItem");
+    btnUpdate.appendChild(textUpdate);
+
+    const inputUpdate = document.createElement('input');
+    inputUpdate.setAttribute("class", "inputEdit");
+    inputUpdate.appendChild(btnUpdate);
+
+    btnUpdate.addEventListener("click", function() {
+      const position = tasks.indexOf(task);
+
+      updateTaskArray(position);
+      updateLocalStorage();
+      removeList();
+      generateList();
+    });
+
     item.appendChild(document.createTextNode(task));
+    item.appendChild(btnUpdate);
     item.appendChild(btnRemove);
     list.appendChild(item);
   })
+}
+
+function updateTaskArray(event) {
+  const btnUpdate = event.target;
+  const item = btnUpdate.closest('li');
+  btnUpdate.classList.add('updating')
+
+  item.classList.add('updating')
 }
 
 function clearInput() {

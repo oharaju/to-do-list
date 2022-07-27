@@ -1,0 +1,10 @@
+.updating .inputEdit {
+  display: block;
+  border: 1px solid #2a78d1;
+  border-radius: 3px;
+  padding: 5px;
+}
+
+.updating .updateItem {
+  display: none;
+}
