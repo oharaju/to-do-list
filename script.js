@@ -14,54 +14,59 @@ function updateLocalStorage() {
   localStorage.setItem('listTask', newTasks);
 }
 
+function createButtonRemove(task) {
+  const btnRemove = document.createElement('button');
+  const textRemove = document.createTextNode('delete');
+  btnRemove.setAttribute("class", "removerItem");
+  btnRemove.appendChild(textRemove);
+
+  btnRemove.addEventListener("click", function() {
+    const position = tasks.indexOf(task);
+    removeTaskArray(position);
+    updateLocalStorage();
+    removeList();
+    generateList();
+    updateTaskArray();
+  });
+
+  return btnRemove;
+}
+
+function createButtonUpdate(index) {
+  const btnUpdate = document.createElement('button');
+  const textUpdate = document.createTextNode('editar');
+  btnUpdate.setAttribute("class", "updateItem");
+  btnUpdate.appendChild(textUpdate);
+
+  const inputUpdate = document.createElement('input');
+  inputUpdate.setAttribute("class", "inputEdit");
+  inputUpdate.appendChild(btnUpdate);
+
+
+  btnUpdate.addEventListener("click", function() {
+    console.log(index)
+    updateTaskArray(index)
+
+  })
+
+  return btnUpdate;
+}
+
 function generateList() {
-  tasks.forEach(function(task) {
+  tasks.forEach(function(task, index) {
     const item = document.createElement('li');
 
-    const btnRemove = document.createElement('button');
-    const textRemove = document.createTextNode('delete');
-    btnRemove.setAttribute("class", "removerItem");
-    btnRemove.appendChild(textRemove);
-
-    btnRemove.addEventListener("click", function() {
-      const position = tasks.indexOf(task);
-      removeTaskArray(position);
-      updateLocalStorage();
-      removeList();
-      generateList();
-      updateTaskArray();
-    });
-
-    const btnUpdate = document.createElement('button');
-    const textUpdate = document.createTextNode('editar');
-    btnUpdate.setAttribute("class", "updateItem");
-    btnUpdate.appendChild(textUpdate);
-
-    const inputUpdate = document.createElement('input');
-    inputUpdate.setAttribute("class", "inputEdit");
-    inputUpdate.appendChild(btnUpdate);
+    console.log(index)
 
     item.appendChild(document.createTextNode(task));
-    item.appendChild(btnUpdate);
-    item.appendChild(btnRemove);
+    item.appendChild(createButtonUpdate(index));
+    item.appendChild(createButtonRemove(task));
     list.appendChild(item);
   })
 }
 
-function updateTaskArray() {
-  const buttonsUpdate = document.querySelectorAll(".updateItem");
-
-  for (let i = 0; i <  buttonsUpdate.length; i++) {
-    const buttonUpdateItem =  buttonsUpdate[i];
-
-    buttonUpdateItem.addEventListener("click", function (event){
-      const buttonUpdate = event.target;
-      // const closestUpdate = buttonUpdate.closest('li');
-      // closestUpdate.classList.add('updating');
-
-      console.log(buttonUpdate)
-    });
-  }
+function updateTaskArray(index) {
+  console.log(tasks[index])
 }
 
 function removeTaskArray(position) {
