@@ -1,6 +1,6 @@
-const form = document.querySelector('.register');
-const taskInput = document.querySelector('.taskInput');
-const list = document.querySelector('.list');
+const form = document.querySelector(".register");
+const taskInput = document.querySelector(".taskInput");
+const list = document.querySelector(".list");
 
 let tasks = JSON.parse(localStorage.getItem("listTask")) || [];
 
@@ -11,62 +11,64 @@ function addTaskArray() {
 
 function updateLocalStorage() {
   const newTasks = JSON.stringify(tasks);
-  localStorage.setItem('listTask', newTasks);
+  localStorage.setItem("listTask", newTasks);
 }
 
 function createButtonRemove(task) {
-  const btnRemove = document.createElement('button');
-  const textRemove = document.createTextNode('delete');
-  btnRemove.setAttribute("class", "removerItem");
+  const btnRemove = document.createElement("button");
+  const textRemove = document.createTextNode("delete");
+  btnRemove.classList.add("removerItem");
   btnRemove.appendChild(textRemove);
 
-  btnRemove.addEventListener("click", function() {
+  btnRemove.addEventListener("click", function () {
     const position = tasks.indexOf(task);
     removeTaskArray(position);
     updateLocalStorage();
     removeList();
     generateList();
-    updateTaskArray();
+    handleEditItem();
   });
 
   return btnRemove;
 }
 
-function createButtonUpdate(index) {
-  const btnUpdate = document.createElement('button');
-  const textUpdate = document.createTextNode('editar');
-  btnUpdate.setAttribute("class", "updateItem");
+function createButtonEdit() {
+  const btnUpdate = document.createElement("button");
+  const textUpdate = document.createTextNode("editar");
+  btnUpdate.classList.add("updateItem");
   btnUpdate.appendChild(textUpdate);
 
-  const inputUpdate = document.createElement('input');
-  inputUpdate.setAttribute("class", "inputEdit");
+  const inputUpdate = document.createElement("input");
   inputUpdate.appendChild(btnUpdate);
 
-
-  btnUpdate.addEventListener("click", function() {
-    console.log(index)
-    updateTaskArray(index)
-
-  })
+  btnUpdate.addEventListener("click", function (event) {
+    const edit = event.target;
+    const item = edit.closest("li");
+    item.classList.add("editing");
+  });
 
   return btnUpdate;
 }
 
 function generateList() {
-  tasks.forEach(function(task, index) {
-    const item = document.createElement('li');
+  tasks.forEach(function (task, index) {
+    const item = document.createElement("li");
 
-    console.log(index)
+    // console.log(index)
 
     item.appendChild(document.createTextNode(task));
-    item.appendChild(createButtonUpdate(index));
+    item.appendChild(createButtonEdit());
     item.appendChild(createButtonRemove(task));
     list.appendChild(item);
-  })
+  });
 }
 
-function updateTaskArray(index) {
-  console.log(tasks[index])
+function handleEditItem(index) {
+  // const editar = tasks[index];
+  // const updateItem = document.querySelectorAll("inputEdit").value;
+
+  // console.log(editar, updateItem)
+  console.log(tasks[index]);
 }
 
 function removeTaskArray(position) {
@@ -81,9 +83,8 @@ function removeList() {
   list.innerHTML = "";
 }
 
-
 function validateInput(value) {
-  return value.length > 0
+  return value.length > 0;
 }
 
 function handleSubmit(e) {
@@ -91,7 +92,7 @@ function handleSubmit(e) {
 
   const valueInput = taskInput.value;
 
-  if(validateInput(valueInput)) {
+  if (validateInput(valueInput)) {
     addTaskArray();
     updateLocalStorage();
     removeList();
