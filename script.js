@@ -26,7 +26,6 @@ function createButtonRemove(task) {
     updateLocalStorage();
     removeList();
     generateList();
-    handleEditItem();
   });
 
   return btnRemove;
@@ -38,9 +37,6 @@ function createButtonEdit() {
   btnUpdate.classList.add("updateItem");
   btnUpdate.appendChild(textUpdate);
 
-  const inputUpdate = document.createElement("input");
-  inputUpdate.appendChild(btnUpdate);
-
   btnUpdate.addEventListener("click", function (event) {
     const edit = event.target;
     const item = edit.closest("li");
@@ -50,25 +46,45 @@ function createButtonEdit() {
   return btnUpdate;
 }
 
-function generateList() {
-  tasks.forEach(function (task, index) {
-    const item = document.createElement("li");
+function createInputEdit() {
+  const inputUpdate = document.createElement("input");
+  inputUpdate.classList.add("inputEdit");
+  inputUpdate.type = "text";
 
-    // console.log(index)
-
-    item.appendChild(document.createTextNode(task));
-    item.appendChild(createButtonEdit());
-    item.appendChild(createButtonRemove(task));
-    list.appendChild(item);
-  });
+  return inputUpdate;
 }
 
-function handleEditItem(index) {
-  // const editar = tasks[index];
-  // const updateItem = document.querySelectorAll("inputEdit").value;
+function createButtonSave(index) {
+  const btnSave = document.createElement("button");
+  const textSave = document.createTextNode("salvar");
+  btnSave.classList.add("SaveItem");
+  btnSave.appendChild(textSave);
 
-  // console.log(editar, updateItem)
-  console.log(tasks[index]);
+  btnSave.addEventListener("click", function (event) {
+    const save = event.target;
+    const item = save.closest("li");
+    const input = item.querySelector("input");
+    const inputValue = input.value;
+
+    if (validateInput(inputValue)) {
+      tasks[index] = inputValue;
+
+      updateLocalStorage();
+      removeList();
+      generateList();
+    }
+  });
+
+  return btnSave;
+}
+
+function createButtonCancel() {
+  const btnCancel = document.createElement("button");
+  const textCancel = document.createTextNode("cancelar");
+  btnCancel.classList.add("cancelItem");
+  btnCancel.appendChild(textCancel);
+
+  return btnCancel;
 }
 
 function removeTaskArray(position) {
@@ -85,6 +101,20 @@ function removeList() {
 
 function validateInput(value) {
   return value.length > 0;
+}
+
+function generateList() {
+  tasks.forEach(function (task, index) {
+    const item = document.createElement("li");
+
+    item.appendChild(document.createTextNode(task));
+    item.appendChild(createButtonEdit());
+    item.appendChild(createButtonRemove(task));
+    item.appendChild(createInputEdit());
+    item.appendChild(createButtonSave(index));
+    item.appendChild(createButtonCancel());
+    list.appendChild(item);
+  });
 }
 
 function handleSubmit(e) {

@@ -1,3 +1,28 @@
 .editing .updateItem {
   display: none;
 }
+
+.editing .removerItem {
+  display: none;
+}
+
+.editing .inputEdit {
+  display: inline-block;
+}
+
+.editing .SaveItem {
+  display: inline-block;
+}
+
+.editing .cancelItem {
+  display: inline-block;
+}
+
+.SaveItem, .cancelItem, .inputEdit, span {
+  display: none;
+}
+
+
+.editing span {
+  display: inline-block;
+}
