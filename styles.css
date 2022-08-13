@@ -18,11 +18,11 @@
   display: inline-block;
 }
 
-.SaveItem, .cancelItem, .inputEdit, span {
+.SaveItem, .cancelItem, .inputEdit {
   display: none;
 }
 
 
-.editing span {
-  display: inline-block;
+.cancel .inputEdit .SaveItem .cancelItem  {
+  display: none;
 }

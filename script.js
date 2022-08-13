@@ -84,6 +84,18 @@ function createButtonCancel() {
   btnCancel.classList.add("cancelItem");
   btnCancel.appendChild(textCancel);
 
+  btnCancel.addEventListener("click", function(event) {
+    const buttoncancel = event.target;
+    const closest = buttoncancel.closest("li");
+    closest.classList.add("cancel");
+
+    updateLocalStorage();
+    removeList();
+    generateList();
+
+    console.log(buttoncancel)
+  })
+
   return btnCancel;
 }
 
