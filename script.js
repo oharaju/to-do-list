@@ -54,26 +54,13 @@ function createInputEdit() {
   return inputUpdate;
 }
 
-function createButtonSave(index) {
+
+function createButtonSave() {
   const btnSave = document.createElement("button");
   const textSave = document.createTextNode("salvar");
-  btnSave.classList.add("SaveItem");
   btnSave.appendChild(textSave);
-
-  btnSave.addEventListener("click", function (event) {
-    const save = event.target;
-    const item = save.closest("li");
-    const input = item.querySelector("input");
-    const inputValue = input.value;
-
-    if (validateInput(inputValue)) {
-      tasks[index] = inputValue;
-
-      updateLocalStorage();
-      removeList();
-      generateList();
-    }
-  });
+  btnSave.type = "submit";
+  btnSave.classList.add("saveItem");
 
   return btnSave;
 }
@@ -92,8 +79,6 @@ function createButtonCancel() {
     updateLocalStorage();
     removeList();
     generateList();
-
-    console.log(buttoncancel)
   })
 
   return btnCancel;
@@ -119,15 +104,38 @@ function generateList() {
   tasks.forEach(function (task, index) {
     const item = document.createElement("li");
 
-    item.appendChild(document.createTextNode(task));
-    item.appendChild(createButtonEdit());
-    item.appendChild(createButtonRemove(task));
-    item.appendChild(createInputEdit());
-    item.appendChild(createButtonSave(index));
-    item.appendChild(createButtonCancel());
+    const formItem = document.createElement("form");
+
+    formItem.addEventListener("submit", function (event) {
+      event.preventDefault();
+
+      const save = event.target;
+      const item = save.closest("li");
+      const input = item.querySelector("input");
+      const inputValue = input.value;
+
+      if (validateInput(inputValue)) {
+        tasks[index] = inputValue;
+
+        updateLocalStorage();
+        removeList();
+        generateList();
+      }
+    });
+
+    formItem.appendChild(document.createTextNode(task));
+    formItem.appendChild(createButtonEdit());
+    formItem.appendChild(createButtonRemove(task));
+    formItem.appendChild(createInputEdit());
+    formItem.appendChild(createButtonSave());
+    formItem.appendChild(createButtonCancel());
+
+    item.appendChild(formItem);
+
     list.appendChild(item);
   });
 }
+
 
 function handleSubmit(e) {
   e.preventDefault();

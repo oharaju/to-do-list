@@ -10,7 +10,7 @@
   display: inline-block;
 }
 
-.editing .SaveItem {
+.editing .saveItem {
   display: inline-block;
 }
 
@@ -18,11 +18,10 @@
   display: inline-block;
 }
 
-.SaveItem, .cancelItem, .inputEdit {
+.saveItem, .cancelItem, .inputEdit {
   display: none;
 }
 
-
-.cancel .inputEdit .SaveItem .cancelItem  {
+.cancel .inputEdit .saveItem .cancelItem {
   display: none;
 }
