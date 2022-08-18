@@ -17,6 +17,7 @@ function updateLocalStorage() {
 function createButtonRemove(task) {
   const btnRemove = document.createElement("button");
   const textRemove = document.createTextNode("delete");
+  btnRemove.classList.add("btnItem");
   btnRemove.classList.add("removerItem");
   btnRemove.appendChild(textRemove);
 
@@ -34,7 +35,9 @@ function createButtonRemove(task) {
 function createButtonEdit() {
   const btnUpdate = document.createElement("button");
   const textUpdate = document.createTextNode("editar");
+  btnUpdate.classList.add("btnItem");
   btnUpdate.classList.add("updateItem");
+
   btnUpdate.appendChild(textUpdate);
 
   btnUpdate.addEventListener("click", function (event) {
@@ -54,13 +57,15 @@ function createInputEdit() {
   return inputUpdate;
 }
 
-
 function createButtonSave() {
   const btnSave = document.createElement("button");
-  const textSave = document.createTextNode("salvar");
-  btnSave.appendChild(textSave);
   btnSave.type = "submit";
+  btnSave.classList.add("btnItem");
   btnSave.classList.add("saveItem");
+
+  const icon = document.createElement("i");
+  icon.innerHTML = '<i class="fa-solid fa-floppy-disk" aria-hidden="true"></i>';
+  btnSave.appendChild(icon);
 
   return btnSave;
 }
@@ -68,6 +73,7 @@ function createButtonSave() {
 function createButtonCancel() {
   const btnCancel = document.createElement("button");
   const textCancel = document.createTextNode("cancelar");
+  btnCancel.classList.add("btnItem");
   btnCancel.classList.add("cancelItem");
   btnCancel.appendChild(textCancel);
 
