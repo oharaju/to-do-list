@@ -16,10 +16,13 @@ function updateLocalStorage() {
 
 function createButtonRemove(task) {
   const btnRemove = document.createElement("button");
-  const textRemove = document.createTextNode("delete");
   btnRemove.classList.add("btnItem");
   btnRemove.classList.add("removerItem");
-  btnRemove.appendChild(textRemove);
+
+  const icon = document.createElement("i");
+  icon.innerHTML = '<i class="fa fa-trash" aria-hidden="true"></i>';
+  btnRemove.appendChild(icon);
+
 
   btnRemove.addEventListener("click", function () {
     const position = tasks.indexOf(task);
@@ -34,11 +37,12 @@ function createButtonRemove(task) {
 
 function createButtonEdit() {
   const btnUpdate = document.createElement("button");
-  const textUpdate = document.createTextNode("editar");
   btnUpdate.classList.add("btnItem");
   btnUpdate.classList.add("updateItem");
 
-  btnUpdate.appendChild(textUpdate);
+  const icon = document.createElement("i");
+  icon.innerHTML = '<i class="fa-solid fa-pencil" aria-hidden="true"></i>';
+  btnUpdate.appendChild(icon);
 
   btnUpdate.addEventListener("click", function (event) {
     const edit = event.target;
@@ -72,10 +76,12 @@ function createButtonSave() {
 
 function createButtonCancel() {
   const btnCancel = document.createElement("button");
-  const textCancel = document.createTextNode("cancelar");
   btnCancel.classList.add("btnItem");
   btnCancel.classList.add("cancelItem");
-  btnCancel.appendChild(textCancel);
+
+  const icon = document.createElement("i");
+  icon.innerHTML = '<i class="fa-solid fa-xmark" aria-hidden="true"></i>';
+  btnCancel.appendChild(icon);
 
   btnCancel.addEventListener("click", function(event) {
     const buttoncancel = event.target;
