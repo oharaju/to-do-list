@@ -58,7 +58,6 @@ function createInputEdit() {
   inputUpdate.classList.add("inputEdit");
   inputUpdate.type = "text";
 
-
   return inputUpdate;
 }
 
@@ -118,11 +117,13 @@ function generateList() {
     const item = document.createElement("li");
 
     const formItem = document.createElement("form");
+    formItem.classList.add("form");
 
+    const box = document.createElement("div");
     const itemSpan = document.createElement("span");
-    itemSpan.appendChild(document.createTextNode(task))
 
-    formItem.appendChild(itemSpan);
+    itemSpan.appendChild(document.createTextNode(task));
+    box.appendChild(itemSpan);
 
     formItem.addEventListener("submit", function (event) {
       event.preventDefault();
@@ -142,18 +143,24 @@ function generateList() {
       }
     });
 
-    formItem.appendChild(createButtonEdit());
-    formItem.appendChild(createButtonRemove(task));
-    formItem.appendChild(createInputEdit());
-    formItem.appendChild(createButtonSave());
-    formItem.appendChild(createButtonCancel());
+    box.appendChild(createInputEdit());
+
+    formItem.appendChild(box);
+
+    const buttonBox = document.createElement("div");
+
+    buttonBox.appendChild(createButtonEdit());
+    buttonBox.appendChild(createButtonRemove(task));
+    buttonBox.appendChild(createButtonSave());
+    buttonBox.appendChild(createButtonCancel());
+
+    formItem.appendChild(buttonBox);
 
     item.appendChild(formItem);
 
     list.appendChild(item);
   });
 }
-
 
 function handleSubmit(e) {
   e.preventDefault();

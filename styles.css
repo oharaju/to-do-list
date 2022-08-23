@@ -62,8 +62,6 @@ li {
   background-color: #e7e7e7;
   padding: 10px;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
 }
 
 li:nth-child(even) {
@@ -96,10 +94,11 @@ li:nth-child(even) {
   background-color: #554994;
 }
 
-.box {
+.form {
+  width: 100%;
   display: flex;
+  justify-content: space-between;
   align-items: center;
-  gap: 10px;
 }
 
 .editing .updateItem {
