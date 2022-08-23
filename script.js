@@ -5,7 +5,8 @@ const list = document.querySelector(".list");
 let tasks = JSON.parse(localStorage.getItem("listTask")) || [];
 
 function addTaskArray() {
-  const currentTask = taskInput.value;
+  const currentTask = taskInput.value.toUpperCase();
+
   tasks.push(currentTask);
 }
 
@@ -22,7 +23,6 @@ function createButtonRemove(task) {
   const icon = document.createElement("i");
   icon.innerHTML = '<i class="fa fa-trash" aria-hidden="true"></i>';
   btnRemove.appendChild(icon);
-
 
   btnRemove.addEventListener("click", function () {
     const position = tasks.indexOf(task);
@@ -57,6 +57,7 @@ function createInputEdit() {
   const inputUpdate = document.createElement("input");
   inputUpdate.classList.add("inputEdit");
   inputUpdate.type = "text";
+
 
   return inputUpdate;
 }
@@ -118,13 +119,19 @@ function generateList() {
 
     const formItem = document.createElement("form");
 
+    const itemSpan = document.createElement("span");
+    itemSpan.appendChild(document.createTextNode(task))
+
+    formItem.appendChild(itemSpan);
+
     formItem.addEventListener("submit", function (event) {
       event.preventDefault();
 
       const save = event.target;
       const item = save.closest("li");
       const input = item.querySelector("input");
-      const inputValue = input.value;
+
+      const inputValue = input.value.toUpperCase();
 
       if (validateInput(inputValue)) {
         tasks[index] = inputValue;
@@ -135,7 +142,6 @@ function generateList() {
       }
     });
 
-    formItem.appendChild(document.createTextNode(task));
     formItem.appendChild(createButtonEdit());
     formItem.appendChild(createButtonRemove(task));
     formItem.appendChild(createInputEdit());

@@ -96,7 +96,17 @@ li:nth-child(even) {
   background-color: #554994;
 }
 
+.box {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
 .editing .updateItem {
+  display: none;
+}
+
+.editing span {
   display: none;
 }
 
@@ -125,4 +135,8 @@ li:nth-child(even) {
 
 .cancel .inputEdit .saveItem .cancelItem {
   display: none;
+}
+
+.inputEdit {
+  text-transform: uppercase;
 }
