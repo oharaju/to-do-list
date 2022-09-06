@@ -143,6 +143,7 @@ function generateList() {
       }
     });
 
+
     box.appendChild(createInputEdit());
 
     formItem.appendChild(box);
