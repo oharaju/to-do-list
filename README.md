@@ -21,3 +21,8 @@ Enter the project folder:
 ```
 cd to-do-list
 ```
+
+
+# Screenshots
+
+![ezgif com-gif-maker](https://user-images.githubusercontent.com/93061504/192922317-5c304196-3ec4-4796-be7b-28623b1ce5cd.gif)
