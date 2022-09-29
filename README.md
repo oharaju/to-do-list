@@ -21,8 +21,8 @@ Enter the project folder:
 ```
 cd to-do-list
 ```
-
+https://oharaju.github.io/to-do-list/
 
 # Screenshots
 
-![ezgif com-gif-maker](https://user-images.githubusercontent.com/93061504/192922317-5c304196-3ec4-4796-be7b-28623b1ce5cd.gif)
+![to-do-list](https://user-images.githubusercontent.com/93061504/192924798-cb4da90c-dc99-481f-9730-a842eb02e597.gif)
